@@ -34,7 +34,6 @@ def forecast_svr(df, target_cols, n_lags=10, n_forecast=100, output_file="data/s
 
         last_window = scaled[-n_lags:].flatten()
         future_preds = []
-        # n_forecast = n_forecast*96
         for _ in range(n_forecast):
             pred = svr.predict(last_window.reshape(1, -1))[0]
             future_preds.append(pred)
@@ -48,7 +47,7 @@ def forecast_svr(df, target_cols, n_lags=10, n_forecast=100, output_file="data/s
 
         if combined_df.empty:
             combined_df['Date'] = future_times
-        combined_df[f'Forecasted {target_col}'] = future_preds_inv
+        combined_df[f'{target_col}'] = future_preds_inv
 
         # print(f"Forecast for {target_col} completed.")
 
